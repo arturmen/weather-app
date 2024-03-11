@@ -1,0 +1,16 @@
+<tui-combo-box class="b-form"
+               [formControl]="selectedCity"
+               [valueContent]="content"
+               [stringify]="stringify"
+               (searchChange)="onSearchChange($event)">
+  Find a city
+  <input placeholder="Type a city name" tuiTextfield (input)="onSearchChange(extractValueFromEvent($event))"/>
+  <tui-data-list-wrapper *tuiDataList [itemContent]="content" [items]="items$ | async"></tui-data-list-wrapper>
+</tui-combo-box>
+
+<ng-template #content let-data>
+  <div class="template">
+    <div class="name">{{ data.name }}</div>
+    <div class="name">{{ data.country }}</div>
+  </div>
+</ng-template>
