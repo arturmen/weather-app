@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-browse-page',
@@ -6,6 +6,4 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
   styleUrl: './browse-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BrowsePageComponent {
-
-}
+export class BrowsePageComponent {}

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CitySearchComponent } from './city-search.component';
 
 describe('CitySearchComponent', () => {
@@ -11,7 +10,7 @@ describe('CitySearchComponent', () => {
       declarations: [CitySearchComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CitySearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

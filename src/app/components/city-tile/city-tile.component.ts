@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {CityService} from "../../services/city.service";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CityService } from "../../services/city.service";
 
 @Component({
   selector: 'app-city-tile',
@@ -8,11 +8,13 @@ import {CityService} from "../../services/city.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CityTileComponent {
-  get item() {
-    return this.cityService.city;
+  get city$() {
+    return this.cityService.city$;
+  }
+  get weather$() {
+    return this.cityService.weather$;
   }
 
-  constructor(private cityService: CityService) {
+  constructor(public cityService: CityService) {
   }
-
 }
