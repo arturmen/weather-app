@@ -1,0 +1,24 @@
+:host {
+  .city-search {
+    display: flex;
+    width: 100%;
+    gap: 24px;
+
+    &__input {
+      flex-grow: 1;
+    }
+  }
+
+  .city-template {
+    display: flex;
+
+    &__name {
+      font-weight: bold;
+    }
+
+    &__description {
+      display: flex;
+      font-style: italic;
+    }
+  }
+}

@@ -7,26 +7,39 @@ import { City, Weather } from "../models/app.model";
   providedIn: 'root'
 })
 export class CityService {
-  city = new BehaviorSubject<City | null>(null);
   weather = new BehaviorSubject<Weather | null>(null);
-
-  get city$() {
-    return this.city.asObservable();
-  }
+  selectedCity = new BehaviorSubject<City | null>(null);
+  cities = new BehaviorSubject<City[]>([]);
 
   get weather$() {
     return this.weather.asObservable();
   }
 
-  constructor(private httpService: HttpService) { }
-
-  setCity(city: City) {
-    this.city.next(city);
+  get selectedCity$() {
+    return this.selectedCity.asObservable();
   }
+
+  get cities$() {
+    return this.cities.asObservable();
+  }
+
+  constructor(private httpService: HttpService) { }
 
   getWeather(city: City) {
     return this.httpService.getCityWeather(city).pipe(
       tap(cityWeather => this.weather.next(cityWeather))
+    );
+  }
+
+  setSelectedCity(city: City) {
+    this.selectedCity.next(city);
+    this.getWeather(city).subscribe();
+    this.getCities(city.name).subscribe();
+  }
+
+  getCities(cityName: string) {
+    return this.httpService.getCitiesByName(cityName).pipe(
+      tap(cities => this.cities.next(cities))
     );
   }
 }

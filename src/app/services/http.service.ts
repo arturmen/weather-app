@@ -11,7 +11,7 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   getCitiesByName(cityName: string): Observable<City[]> {
-    return this.http.get(`https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=10&language=en&format=json`)
+    return this.http.get(`https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=12&language=en&format=json`)
       .pipe(
         map(itemsWrapper  => {
           return (itemsWrapper as CityResponse).results

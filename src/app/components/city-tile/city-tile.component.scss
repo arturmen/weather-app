@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  max-width: 600px;
+  min-width: 440px;
+
+  .city-tile {
+    &__header {
+      &__title {
+        display: flex;
+
+        tui-svg {
+          color: lightgray;
+
+          &.favourite {
+            color: gold;
+          }
+        }
+      }
+    }
+    &__footer {
+      display: flex;
+      gap: 8px;
+    }
+  }
+}

@@ -1,0 +1,91 @@
+<header tuiNavigationHeader>
+
+  <button
+    appearance="secondary"
+    iconLeft="tuiIconGrid"
+    tuiIconButton>
+  </button>
+
+  <span tuiNavigationLogo>
+    <button
+      iconLeft="tuiIconHome"
+      tuiButton
+      (click)="goToHomePage()"
+    ></button>
+    <span tuiFade>Weather app</span>
+    <tui-badge>v0.1</tui-badge>
+  </span>
+
+</header>
+
+<!--<aside [tuiNavigationAside]="expanded">-->
+<!--  Sidebar content-->
+<!--</aside>-->
+
+
+
+<div [style.display]="'flex'">
+  <aside
+    [tuiNavigationAside]="expanded"
+  >
+    <header>
+      <button
+        iconLeft="tuiIconHome"
+        tuiButton
+      >
+        <span tuiFade>Weather app</span>
+      </button>
+    </header>
+    <button
+      iconLeft="tuiIconSearch"
+      tuiButton
+    >
+      Search city
+    </button>
+    <a
+      iconLeft="tuiIconStar"
+      routerLink="/favourites"
+      routerLinkActive="active"
+      tuiAppearance="flat"
+      tuiButton
+    >
+      Favourites
+    </a>
+    <tui-expand [expanded]="expanded">
+      <button tuiButton *ngFor="let favourite of favourites">{{ favourite.name }}</button>
+    </tui-expand>
+    <button
+      iconLeft="tuiIconHeart"
+      tuiButton
+    >
+      <span tuiFade>By default ellipsis is used but you can use fade too</span>
+    </button>
+    <hr />
+    <button
+      iconLeft="tuiIconPlus"
+      tuiButton
+    >
+      Add
+    </button>
+    <footer>
+      <button
+        iconLeft="tuiIconStar"
+        tuiButton
+      >
+        Favorites
+      </button>
+      <button
+        tuiButton
+        [iconLeft]="expanded ? 'tuiIconChevronLeft' : 'tuiIconChevronRight'"
+        (click)="expanded = !expanded"
+      >
+        Collapse
+      </button>
+    </footer>
+  </aside>
+
+  <main tuiNavigationMain>
+    <ng-content></ng-content>
+  </main>
+
+</div>

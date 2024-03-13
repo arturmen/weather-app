@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { debounceTime, filter, Observable, startWith, Subject, Subscription, switchMap, tap } from "rxjs";
 import { FormControl } from "@angular/forms";
 import { HttpService } from "../../services/http.service";
@@ -11,7 +11,7 @@ import { City } from "../../models/app.model";
   styleUrl: './city-search.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CitySearchComponent implements OnInit, OnDestroy {
+export class CitySearchComponent {
   readonly search$ = new Subject<string | null>();
   readonly stringify = (item: City): string => `${item.name}`;
 
@@ -25,7 +25,6 @@ export class CitySearchComponent implements OnInit, OnDestroy {
   );
 
   selectedCity: FormControl<City> = new FormControl();
-  subSink: Subscription[] = [];
 
   constructor(
     private httpService: HttpService,
@@ -33,17 +32,8 @@ export class CitySearchComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnInit() {
-    this.subSink.push(
-      this.selectedCity.valueChanges.pipe(
-        tap(city => this.cityService.setCity(city)),
-        switchMap(city => this.cityService.getWeather(city))
-      ).subscribe()
-    )
-  }
-
-  ngOnDestroy() {
-    this.subSink.forEach(subscription => subscription.unsubscribe())
+  setSelectedCity() {
+    this.cityService.setSelectedCity(this.selectedCity.value)
   }
 
   onSearchChange(searchQuery: string | null): void {

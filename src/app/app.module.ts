@@ -7,7 +7,7 @@ import {
   TuiNotificationModule,
   TuiSvgModule,
   TuiHintModule,
-  TuiButtonModule, TuiHostedDropdownModule, TuiDataListModule, TuiLinkModule
+  TuiHostedDropdownModule, TuiDataListModule, TuiLinkModule, TuiDropdownModule, TuiExpandModule
 } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
@@ -16,9 +16,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowsePageComponent } from './pages/browse-page/browse-page.component';
 import {
+  TuiAvatarComponent, TuiBreadcrumbsModule,
   TuiComboBoxModule,
   TuiDataListWrapperModule,
-  TuiFilterByInputPipeModule
+  TuiFilterByInputPipeModule, TuiTabsModule, TuiToggleModule
 } from "@taiga-ui/kit";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 // @ts-ignore
@@ -28,20 +29,26 @@ import { TuiLetModule, TuiPlatformModule, TuiRepeatTimesModule } from "@taiga-ui
 import { CitySearchComponent } from './components/city-search/city-search.component';
 import { CityTileComponent } from './components/city-tile/city-tile.component';
 import {
-  TuiButtonCloseModule,
-  TuiCardModule, TuiCellModule,
-  TuiIconModule,
+  TuiAppearanceDirective, TuiAppearanceModule,
+  TuiBadgeDirective, TuiBadgeModule, TuiBadgeNotificationComponent,
+  TuiButtonCloseModule, TuiButtonModule,
+  TuiCardModule, TuiCellModule, TuiFadeDirective, TuiFadeModule, TuiHeaderDirective, TuiIconComponent,
+  TuiIconModule, TuiNavigationModule,
   TuiSurfaceModule, TuiThumbnailCardModule, TuiTitleModule
 } from "@taiga-ui/experimental";
 import { CommonModule } from "@angular/common";
 import { TuiRippleModule } from "@taiga-ui/addon-mobile";
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { WeatherPageComponent } from './pages/weather-page/weather-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BrowsePageComponent,
     CitySearchComponent,
-    CityTileComponent
+    CityTileComponent,
+    NavigationComponent,
+    WeatherPageComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +84,16 @@ import { TuiRippleModule } from "@taiga-ui/addon-mobile";
     TuiButtonCloseModule,
     TuiPlatformModule,
     TuiLinkModule,
+    TuiTabsModule,
+    TuiNavigationModule,
+    TuiDropdownModule,
+    TuiExpandModule,
+    TuiCardModule,
+    TuiToggleModule,
+    TuiBreadcrumbsModule,
+    TuiFadeModule,
+    TuiBadgeModule,
+    TuiAppearanceModule,
   ],
   providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
   bootstrap: [AppComponent]

@@ -1,2 +1,19 @@
-<app-city-search></app-city-search>
-<app-city-tile></app-city-tile>
+<div class="browse-page" [class.unselected]="!(selectedCity$ | async)">
+  <app-city-search class="browse-page__city-search"></app-city-search>
+
+
+  <div class="browse-page__cities" *ngIf="selectedCity$ | async; let selectedCity">
+    <div class="divider bottom"></div>
+    <app-city-tile class="browse-page__cities__tile" [city]="selectedCity" [weather]="weather$ | async"></app-city-tile>
+    <div class="divider"></div>
+    <h2>Other results for: {{ selectedCity.name }}</h2>
+    <div class="browse-page__cities__other">
+      <app-city-tile *ngFor="let city of (cities$ | async)"
+                     class="browse-page__cities__tile"
+                     [city]="city">
+      </app-city-tile>
+    </div>
+
+  </div>
+</div>
+

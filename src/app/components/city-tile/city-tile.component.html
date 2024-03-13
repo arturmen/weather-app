@@ -1,26 +1,38 @@
-<div *ngIf="city$ | async; let city"
+<div *ngIf="city"
+     class="city-tile"
      tuiCardLarge
      tuiSurface="elevated">
-  <header tuiHeader>
+  <header tuiHeader class="city-tile__header">
     <h1 tuiTitle>
-      {{ city.name }}
-      <span tuiSubtitle>{{ city.country }}</span>
+      <div class="city-tile__header__title">
+        {{ city.name }}
+        <tui-svg [class.favourite]="favourites.has(city.id)" (click)="toggleFavourites(city)" src="tuiIconStar"></tui-svg>
+      </div>
+      <span tuiSubtitle>
+        <i class="city-tile__header__description">{{ getAdministrationInfo(city) }}</i>
+      </span>
     </h1>
   </header>
 
-  <div class="weather" *ngIf="weather$ | async; let weather">
-    Dane jakies
-    {{ weather.current.temperature_2m }}
+  <div *ngIf="weather">
+    <h2>Temperature: {{ weather.current.temperature_2m }}{{ weather.current_units.temperature_2m }}</h2>
+
+    <h2>Wind speed: {{ weather.current.wind_speed_10m }} {{ weather.current_units.wind_speed_10m }}</h2>
   </div>
 
-  <footer>
-    <button
-      appearance="secondary"
-      size="m"
+  <footer class="city-tile__footer">
+    <a
+      iconLeft="tuiIconExternalLink"
+      [routerLink]="getRouterLink(city)"
+      routerLinkActive="active"
       tuiButton
-      type="button"
-    >
-      Add to favourites
-    </button>
+    >Weather details</a>
+    <button
+      iconLeft="tuiIconStar"
+      tuiAppearance="flat"
+      tuiButton
+      [disabled]="favourites.has(city.id)"
+      (click)="toggleFavourites(city)"
+    >Add to favourites</button>
   </footer>
 </div>

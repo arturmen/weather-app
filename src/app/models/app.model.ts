@@ -20,7 +20,7 @@ export interface City {
 
 export interface Weather {
   current: WeatherInformation,
-  currentUnits: WeatherUnits,
+  current_units: WeatherUnits,
   elevation: number,
   generationtime_ms: number,
   hourly: WeatherTimelyInformation,
