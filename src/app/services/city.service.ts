@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from "./http.service";
 import { BehaviorSubject, tap } from "rxjs";
-import { City, Weather } from "../models/app.model";
+import { City } from "../models/app.model";
+import { Weather } from "../models/weather.model";
 
 @Injectable({
   providedIn: 'root'

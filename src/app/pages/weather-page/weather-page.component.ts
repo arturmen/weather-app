@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from "../../services/weather.service";
 import { ActivatedRoute } from "@angular/router";
-import { map, switchMap, tap } from "rxjs";
-import { AdministrationProperty, City } from "../../models/app.model";
+import { map, switchMap } from "rxjs";
+import { City } from "../../models/app.model";
 import { FavouritesService } from "../../services/favourites.service";
 
 @Component({

@@ -11,7 +11,5 @@ export class CurrentComponent {
     return this.weatherService.weather$;
   }
 
-  constructor(private weatherService: WeatherService) {
-  }
-
+  constructor(private weatherService: WeatherService) {}
 }

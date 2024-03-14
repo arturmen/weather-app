@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { map, Observable } from "rxjs";
-import { City, CityResponse, ExtendedWeather, Weather } from "../models/app.model";
+import { catchError, map, Observable, tap } from "rxjs";
+import { City, CityResponse, CityReversedResponse, } from "../models/app.model";
+import { ExtendedWeather, Weather } from "../models/weather.model";
+import { TuiAlertService } from "@taiga-ui/core";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,10 @@ export class HttpService {
   wind_speed_unit = 'kmh';
   precipitation_unit = 'mm'
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService
+  ) {
     if (localStorage.getItem('settings')) {
       const parsed = JSON.parse(localStorage.getItem('settings') ?? '{}');
       if (parsed) {
@@ -25,6 +30,7 @@ export class HttpService {
   getCitiesByName(cityName: string): Observable<City[]> {
     return this.http.get(`https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=6&language=en&format=json`)
       .pipe(
+        catchError(error => this.errorHandler(error)),
         map(itemsWrapper  => {
           return (itemsWrapper as CityResponse).results
         }),
@@ -33,21 +39,33 @@ export class HttpService {
   }
 
   getCityWeather(city: City): Observable<Weather> {
-    return this.http.get(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m&temperature_unit=${this.temperature_unit}&wind_speed_unit=${this.wind_speed_unit}&precipitation_unit=${this.precipitation_unit}&timezone=auto`) as Observable<Weather>;
+    return this.http.get(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m&temperature_unit=${this.temperature_unit}&wind_speed_unit=${this.wind_speed_unit}&precipitation_unit=${this.precipitation_unit}&timezone=auto`).pipe(
+      catchError(error => this.errorHandler(error)),
+      map(results => results as Weather)
+    );
   }
 
   getCityById(cityId: number): Observable<City> {
-    return this.http.get(`https://geocoding-api.open-meteo.com/v1/get?id=${cityId}`) as Observable<City>;
+    return this.http.get(`https://geocoding-api.open-meteo.com/v1/get?id=${cityId}`).pipe(
+      catchError(error => this.errorHandler(error)),
+      map(results => results as City)
+    );
   }
 
   getExtendedWeather(city: City): Observable<ExtendedWeather> {
     return this.http.get(
     `https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,pressure_msl,surface_pressure,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index,uv_index_clear_sky,is_day,cape,freezing_level_height,sunshine_duration&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max,uv_index_clear_sky_max,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant,shortwave_radiation_sum,et0_fao_evapotranspiration&forecast_days=16&forecast_hours=24&temperature_unit=${this.temperature_unit}&wind_speed_unit=${this.wind_speed_unit}&precipitation_unit=${this.precipitation_unit}&timezone=auto`
-    ) as Observable<ExtendedWeather>;
+    ).pipe(
+      catchError(error => this.errorHandler(error)),
+      map(results => results as ExtendedWeather)
+    );
   }
 
-  getCityInfoByCoordinates(lat: number, lon: number) {
-    return this.http.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+  getCityInfoByCoordinates(lat: number, lon: number): Observable<CityReversedResponse> {
+    return this.http.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`).pipe(
+      catchError(error => this.errorHandler(error)),
+      map(results => results as CityReversedResponse)
+    );
   }
 
   setUnits(temperature: string | null, speed: string | null, precipitation: string | null) {
@@ -60,5 +78,12 @@ export class HttpService {
       'wind_speed_unit': this.wind_speed_unit,
       'precipitation_unit': this.precipitation_unit
     }))
+  }
+
+  errorHandler(error: Error) {
+    return this.alerts.open(
+      `<strong>Error: </strong> ${ error.message }`,
+      {label: 'Error message', status: 'error'}
+    )
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WeatherService } from "../../services/weather.service";
 import { map, switchMap, tap } from "rxjs";
 import { CityService } from "../../services/city.service";
-import { City, ExtendedWeather } from "../../models/app.model";
+import { City, CityReversedResponse } from "../../models/app.model";
 
 @Component({
   selector: 'app-home-page',
@@ -22,7 +22,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     navigator.geolocation.getCurrentPosition((position) => {
       this.weatherService.getCityInfoByCoordinates(position.coords.latitude, position.coords.longitude).pipe(
-        switchMap((city: any) => this.cityService.getCities(city.city)),
+        switchMap((city: CityReversedResponse) => this.cityService.getCities(city.city)),
         map((cities: City[]) => cities[0].id),
         switchMap(cityId => this.weatherService.getCityInfo(Number(cityId))),
         switchMap((city: City) => this.weatherService.getWeatherInfo(city)),

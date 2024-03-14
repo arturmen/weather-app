@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { AdministrationProperty, City, Weather } from "../../models/app.model";
+import { AdministrationProperty, City } from "../../models/app.model";
 import { FavouritesService } from "../../services/favourites.service";
 import { Router } from "@angular/router";
-
+import { Weather } from "../../models/weather.model";
 @Component({
   selector: 'app-city-tile',
   templateUrl: './city-tile.component.html',

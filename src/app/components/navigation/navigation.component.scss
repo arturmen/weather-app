@@ -3,7 +3,7 @@
 $navigation-bar-color: #0F172E;
 
 :host {
-  .navigation-desktop {
+  .navigation {
     header[tuiNavigationHeader] {
       justify-content: space-between;
       background-color: $navigation-bar-color;
@@ -28,14 +28,6 @@ $navigation-bar-color: #0F172E;
     display: flex;
     flex-direction: column;
 
-    @include mobile {
-      display: flex;
-    }
-
-    @include desktop {
-      display: none;
-    }
-
     &__top {
       &.black {
         color: var(--tui-base-01);
@@ -46,14 +38,6 @@ $navigation-bar-color: #0F172E;
         }
       }
     }
-
-    &__content {
-
-    }
-
-    &__footer {
-
-    }
   }
 
   .flex-container {
@@ -61,11 +45,11 @@ $navigation-bar-color: #0F172E;
   }
 
   @include mobile {
-    .navigation-desktop__header {
+    .navigation__header {
       display: none;
     }
 
-    .navigation-desktop__aside {
+    .navigation__aside {
       display: none;
     }
 
@@ -88,11 +72,11 @@ $navigation-bar-color: #0F172E;
   }
 
   @include desktop {
-    .navigation-desktop__header {
+    .navigation__header {
       display: flex;
     }
 
-    .navigation-desktop__aside {
+    .navigation__aside {
       display: flex;
     }
 

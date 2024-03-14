@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
 import { BrowsePageComponent } from './pages/browse-page/browse-page.component';
 import {
   TuiAccordionModule,
-  TuiAvatarComponent, TuiBreadcrumbsModule,
+  TuiBreadcrumbsModule,
   TuiComboBoxModule,
   TuiDataListWrapperModule,
   TuiFilterByInputPipeModule, TuiSelectModule, TuiTabsModule, TuiToggleModule
@@ -31,10 +31,10 @@ import { CitySearchComponent } from './components/city-search/city-search.compon
 import { CityTileComponent } from './components/city-tile/city-tile.component';
 import {
   TuiAppBarModule,
-  TuiAppearanceDirective, TuiAppearanceModule,
-  TuiBadgeDirective, TuiBadgeModule, TuiBadgeNotificationComponent,
+  TuiAppearanceModule,
+  TuiBadgeModule,
   TuiButtonCloseModule, TuiButtonModule,
-  TuiCardModule, TuiCellModule, TuiFadeDirective, TuiFadeModule, TuiHeaderDirective, TuiIconComponent,
+  TuiCardModule, TuiCellModule, TuiFadeModule,
   TuiIconModule, TuiNavigationModule,
   TuiSurfaceModule, TuiThumbnailCardModule, TuiTitleModule
 } from "@taiga-ui/experimental";

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from "@angular/router";
 import { FavouritesService } from "../../services/favourites.service";
 import { City } from "../../models/app.model";
 
@@ -15,8 +14,7 @@ export class NavigationComponent {
     return this.favouritesService.favourites;
   }
 
-  constructor(private router: Router, private favouritesService: FavouritesService) {
-  }
+  constructor(private favouritesService: FavouritesService) {}
 
   getRouterLink(city: City) {
     return `/weather/${city.id}`
