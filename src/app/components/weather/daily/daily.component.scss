@@ -1,3 +1,5 @@
+@import '../../../styles/breakpoints';
+
 :host {
   .daily {
     &__accordion {
@@ -62,6 +64,48 @@
       .t-header_hoverable {
         background: #e9e9f1!important;
       }
+    }
+  }
+
+  @include mobile {
+    .daily {
+      &__accordion {
+        &__item {
+          display: flex;
+
+          &__template {
+            &__basic {
+              flex-wrap: wrap;
+              gap: 24px;
+              align-items: center;
+
+              &__temperature {
+                &__main {
+                  font-size: 20px;
+                }
+              }
+            }
+
+            &__advanced {
+              padding: 16px 0 0;
+            }
+          }
+
+          .short-time {
+            flex-grow: 1;
+          }
+        }
+      }
+    }
+
+    .long-time {
+      display: none;
+    }
+  }
+
+  @include desktop {
+    .short-time {
+      display: none;
     }
   }
 }

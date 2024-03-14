@@ -1,3 +1,5 @@
+@import '../../styles/breakpoints';
+
 :host {
   display: block;
   max-width: 600px;
@@ -25,5 +27,19 @@
       display: flex;
       gap: 8px;
     }
+  }
+
+  @include mobile {
+    min-width: 300px;
+    width: 100%;
+
+    .city-tile {
+      &__footer {
+        .add-favourite {
+          display: none;
+        }
+      }
+    }
+
   }
 }

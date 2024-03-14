@@ -5,10 +5,7 @@ import {
   filter,
   Observable,
   startWith,
-  Subject,
-  Subscription,
   switchMap,
-  tap
 } from "rxjs";
 import { FormControl } from "@angular/forms";
 import { HttpService } from "../../services/http.service";
@@ -67,5 +64,9 @@ export class CitySearchComponent {
       return null;
     }
     return (event.target as HTMLInputElement)?.value || null;
+  }
+
+  getAdministrationInfo(city: City) {
+    return `, ${city.country}, ${city.admin1}`
   }
 }

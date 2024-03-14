@@ -5,7 +5,8 @@
       borders="top-bottom"
     >
       <div class="daily__accordion__item">
-        <div> {{ weather.daily.time[weatherDayIndex] | date:'fullDate' }}</div>
+        <div class="long-time"> {{ weather.daily.time[weatherDayIndex] | date:'fullDate' }}</div>
+        <div class="short-time"> {{ weather.daily.time[weatherDayIndex] | date:'MMM d' }}</div>
         <div class="middle"> {{ weather.daily.temperature_2m_min[weatherDayIndex] }}{{ weather.daily_units.temperature_2m_min }} — {{ weather.daily.temperature_2m_max[weatherDayIndex] }}{{ weather.daily_units.temperature_2m_max }}</div>
         <app-weather-model [small]="true" [weatherCode]="weather.daily.weather_code[weatherDayIndex]"></app-weather-model>
       </div>

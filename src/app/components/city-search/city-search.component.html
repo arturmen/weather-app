@@ -15,7 +15,7 @@
     type="submit"
     [disabled]="!(search$ | async) && !selectedCity"
     (click)="setSelectedCity()"
-  >Search</button>
+  ><span class="text">Search</span></button>
 </div>
 
 <tui-notification *ngIf="noResults | async" class="no-results">
@@ -26,9 +26,8 @@
 <ng-template #content let-data>
   <div class="city-template" style="display: flex;">
     <strong class="city-template__name">{{ data.name }}</strong>
-    <i class="city-template__description" style="display: flex;">
-      <div class="city-template__description__info">, {{ data.country }}</div>
-      <div class="city-template__description__info" *ngIf="data.admin1">, {{ data.admin1 }}</div>
+    <i class="city-template__description">
+      {{ getAdministrationInfo(data) }}
     </i>
   </div>
 </ng-template>

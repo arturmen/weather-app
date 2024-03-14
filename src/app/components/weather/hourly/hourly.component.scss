@@ -1,3 +1,5 @@
+@import '../../../styles/breakpoints';
+
 :host {
   .hourly {
     &__accordion {
@@ -41,6 +43,34 @@
       ::ng-deep.t-wrapper:hover {
         .t-header_hoverable {
           background: #f1ebcf !important;
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    .hourly {
+      &__accordion {
+        &__item {
+          display: flex;
+
+          &__template {
+            &__basic {
+              flex-wrap: wrap;
+              gap: 24px;
+              align-items: center;
+
+              &__temperature {
+                &__main {
+                  font-size: 28px;
+                }
+              }
+            }
+          }
+
+          div:first-child {
+            flex-grow: 1;
+          }
         }
       }
     }

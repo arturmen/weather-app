@@ -4,16 +4,7 @@ $navigation-bar-color: #0F172E;
 
 :host {
   .navigation-desktop {
-    @include mobile {
-      display: none;
-    }
-
-    @include desktop {
-      display: block;
-    }
-
     header[tuiNavigationHeader] {
-      display: flex;
       justify-content: space-between;
       background-color: $navigation-bar-color;
     }
@@ -57,16 +48,60 @@ $navigation-bar-color: #0F172E;
     }
 
     &__content {
-      flex-grow: 1;
-      max-height: 100%;
-      overflow: auto;
-      background: #FAF7DB;
+
     }
 
     &__footer {
 
     }
+  }
 
+  .flex-container {
+    display: flex;
+  }
 
+  @include mobile {
+    .navigation-desktop__header {
+      display: none;
+    }
+
+    .navigation-desktop__aside {
+      display: none;
+    }
+
+    main {
+      flex-grow: 1;
+      max-height: 100%;
+      overflow: auto;
+      background: #FAF7DB;
+      padding: 16px;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    .flex-container {
+      height: 100vh;
+      flex-direction: column;
+    }
+  }
+
+  @include desktop {
+    .navigation-desktop__header {
+      display: flex;
+    }
+
+    .navigation-desktop__aside {
+      display: flex;
+    }
+
+    .navigation-mobile__top {
+      display: none;
+    }
+
+    .navigation-mobile__footer {
+      display: none;
+    }
   }
 }

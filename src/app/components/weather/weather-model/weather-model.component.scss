@@ -1,3 +1,5 @@
+@import '../../../styles/breakpoints';
+
 :host {
   display: flex;
   flex-direction: column;
@@ -16,6 +18,14 @@
     tui-icon {
       width: 1em;
       height: 1em;
+    }
+  }
+
+  @include mobile {
+    &.small {
+      .text {
+        display: none;
+      }
     }
   }
 }

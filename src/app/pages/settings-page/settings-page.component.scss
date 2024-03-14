@@ -1,3 +1,5 @@
+@import '../../styles/breakpoints';
+
 :host {
   display: flex;
   justify-content: center;
@@ -16,6 +18,14 @@
 
     &__footer {
       margin-top: 12px;
+    }
+  }
+
+  @include mobile {
+    padding: 0;
+
+    .settings-page {
+      width: 100%;
     }
   }
 }

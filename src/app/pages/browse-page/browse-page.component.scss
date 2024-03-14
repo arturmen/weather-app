@@ -1,3 +1,5 @@
+@import '../../styles/breakpoints';
+
 :host {
   display: block;
   height: 50%;
@@ -42,5 +44,20 @@
     &.bottom {
       margin-bottom: 24px;
     }
+  }
+
+  @include mobile {
+    padding: 0;
+
+    .browse-page {
+      &.unselected {
+        margin: 30% 0;
+      }
+
+      &__cities {
+        padding-bottom: 16px;
+      }
+    }
+
   }
 }

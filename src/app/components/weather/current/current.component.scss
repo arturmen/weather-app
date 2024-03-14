@@ -1,3 +1,5 @@
+@import '../../../styles/breakpoints';
+
 :host {
   .current {
     &__basic {
@@ -41,6 +43,15 @@
         .value {
           font-weight: bold;
         }
+      }
+    }
+  }
+
+  @include mobile {
+    .current {
+      &__basic {
+        flex-wrap: wrap;
+        gap: 24px;
       }
     }
   }

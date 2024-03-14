@@ -4,7 +4,7 @@
   <header tuiHeader class="weather-page__header">
     <h1 tuiTitle>
       <div class="weather-page__header__title">
-        <h1>Weather - {{ city.name }}</h1>
+        <h1><span class="text">Weather - </span>{{ city.name }}</h1>
       </div>
       <span tuiSubtitle>
         <i class="weather-page__header__description">{{ getAdministrationInfo(city) }}</i>
@@ -25,6 +25,7 @@
         tuiButton
       ></a>
       <a
+        class="search"
         iconLeft="tuiIconSearch"
         routerLink="/browse"
         tuiButton

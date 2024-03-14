@@ -1,5 +1,5 @@
 <div class="navigation-desktop">
-  <header tuiNavigationHeader>
+  <header tuiNavigationHeader class="navigation-desktop__header">
 
     <div>
       <button
@@ -34,8 +34,9 @@
     </a>
   </header>
 
-  <div [style.display]="'flex'">
+  <div class="flex-container">
     <aside
+      class="navigation-desktop__aside"
       [tuiNavigationAside]="expanded"
     >
       <header>
@@ -119,73 +120,65 @@
       </footer>
     </aside>
 
+    <tui-app-bar class="navigation-mobile__top black">
+      <a
+        iconLeft="tuiIconHomeLarge"
+        tuiIconButton
+        routerLink="/home"
+        routerLinkActive
+        tuiSlot="left"
+      ></a>
+      WeatherApp
+      <a
+        iconLeft="tuiIconSearchLarge"
+        tuiIconButton
+        routerLink="/browse"
+        routerLinkActive
+        tuiSlot="right"
+      ></a>
+    </tui-app-bar>
+
     <main tuiNavigationMain>
       <ng-content></ng-content>
     </main>
 
+    <nav tuiTabBar class="navigation-mobile__footer">
+      <a
+        icon="tuiIconSettingsLarge"
+        routerLink="/settings"
+        routerLinkActive="active"
+        tuiTabBarItem
+      >
+        Settings
+      </a>
+
+      <a
+        icon="tuiIconStarLarge"
+        routerLink="/favourites"
+        routerLinkActive
+        tuiTabBarItem
+      >
+        Favourites
+      </a>
+
+      <a
+        icon="tuiIconGithubLarge"
+        href="https://github.com/arturmen/weather-app"
+        target="_blank"
+        tuiTabBarItem
+      >
+        Github
+      </a>
+
+      <a
+        icon="tuiIconLinkedinLarge"
+        href="https://www.linkedin.com/in/artur-muron/"
+        target="_blank"
+        tuiTabBarItem
+      >
+        About author
+      </a>
+    </nav>
+
   </div>
-</div>
-
-
-
-<div class="navigation-mobile">
-  <tui-app-bar class="navigation-mobile__top black">
-    <a
-      iconLeft="tuiIconHomeLarge"
-      tuiIconButton
-      routerLink="/home"
-      routerLinkActive
-      tuiSlot="left"
-    ></a>
-    WeatherApp
-    <a
-      iconLeft="tuiIconSearchLarge"
-      tuiIconButton
-      routerLink="/browse"
-      routerLinkActive
-      tuiSlot="right"
-    ></a>
-  </tui-app-bar>
-
-  <div class="navigation-mobile__content">
-    <ng-content></ng-content>
-  </div>
-
-  <nav tuiTabBar class="navigation-mobile__footer">
-    <a
-      icon="tuiIconSettingsLarge"
-      routerLink="/settings"
-      routerLinkActive="active"
-      tuiTabBarItem
-    >
-      Settings
-    </a>
-
-    <a
-      icon="tuiIconStarLarge"
-      routerLink="/favourites"
-      routerLinkActive
-      tuiTabBarItem
-    >
-      Favourites
-    </a>
-
-    <a
-      icon="tuiIconGithubLarge"
-      href="https://github.com/arturmen/weather-app"
-      target="_blank"
-      tuiTabBarItem
-    >
-      Github
-    </a>
-
-    <a
-      icon="tuiIconLinkedinLarge"
-      href="https://www.linkedin.com/in/artur-muron/"
-      target="_blank"
-      tuiTabBarItem
-    >
-      About author
-    </a>
-  </nav>
 </div>
