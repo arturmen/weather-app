@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { CityService } from "../../services/city.service";
 
 @Component({
@@ -7,7 +7,7 @@ import { CityService } from "../../services/city.service";
   styleUrl: './browse-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BrowsePageComponent {
+export class BrowsePageComponent implements OnDestroy {
 
   get selectedCity$() {
     return this.cityService.selectedCity$;
@@ -22,5 +22,9 @@ export class BrowsePageComponent {
   }
 
   constructor(private cityService: CityService) {
+  }
+
+  ngOnDestroy() {
+    this.cityService.clearData();
   }
 }

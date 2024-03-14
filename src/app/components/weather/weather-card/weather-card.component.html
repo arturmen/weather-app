@@ -1,0 +1,68 @@
+<div class="weather-page" *ngIf="city$ | async; let city; else empty"
+     tuiCardLarge
+     tuiSurface="elevated">
+  <header tuiHeader class="weather-page__header">
+    <h1 tuiTitle>
+      <div class="weather-page__header__title">
+        <h1>Weather - {{ city.name }}</h1>
+      </div>
+      <span tuiSubtitle>
+        <i class="weather-page__header__description">{{ getAdministrationInfo(city) }}</i>
+      </span>
+    </h1>
+    <div class="weather-page__header__buttons">
+      <button
+        class="star"
+        [class.favourite]="favourites.has(city.id)"
+        (click)="toggleFavourites(city)"
+        iconLeft="tuiIconStar"
+        tuiAppearance="flat"
+        tuiButton></button>
+      <a
+        iconLeft="tuiIconSettings"
+        routerLink="/settings"
+        tuiAppearance="flat"
+        tuiButton
+      ></a>
+      <a
+        iconLeft="tuiIconSearch"
+        routerLink="/browse"
+        tuiButton
+      >Search for other city</a>
+    </div>
+
+  </header>
+
+  <div class="weather-page__content">
+
+    <app-weather-current></app-weather-current>
+
+    <tui-tabs class="weather-page__content__tabs">
+      <a
+        tuiTab
+        routerLink="hourly"
+        routerLinkActive
+      > Hourly
+      </a>
+      <a
+        tuiTab
+        routerLink="daily"
+        routerLinkActive
+      > Daily
+      </a>
+    </tui-tabs>
+    <router-outlet></router-outlet>
+
+  </div>
+</div>
+<ng-template #empty>
+  <div tuiCardLarge
+       tuiSurface="elevated">
+    There is no data
+    <a
+      iconLeft="tuiIconSearch"
+      routerLink="/browse"
+      tuiButton
+    >Search for other city</a>
+  </div>
+</ng-template>

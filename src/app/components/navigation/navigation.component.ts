@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { FavouritesService } from "../../services/favourites.service";
+import { City } from "../../models/app.model";
 
 @Component({
   selector: 'app-navigation',
@@ -17,8 +18,7 @@ export class NavigationComponent {
   constructor(private router: Router, private favouritesService: FavouritesService) {
   }
 
-  goToHomePage() {
-    this.router.navigateByUrl('/afdvsa')
+  getRouterLink(city: City) {
+    return `/weather/${city.id}`
   }
-
 }

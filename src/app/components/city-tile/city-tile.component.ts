@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { City, Weather } from "../../models/app.model";
+import { AdministrationProperty, City, Weather } from "../../models/app.model";
 import { FavouritesService } from "../../services/favourites.service";
-
-type AdministrationProperty = 'admin1' | 'admin2' | 'admin3';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-city-tile',
@@ -22,7 +21,7 @@ export class CityTileComponent {
     return this.favouritesService.favouritesIds;
   }
 
-  constructor(private favouritesService: FavouritesService) {}
+  constructor(private favouritesService: FavouritesService, private router: Router) {}
 
   getAdministrationInfo(city: City) {
     let infoText = city.country;
@@ -36,10 +35,14 @@ export class CityTileComponent {
   }
 
   getRouterLink(city: City) {
-    return `/weather/${city.longitude}/${city.latitude}`
+    return `/weather/${city.id}`;
   }
 
   toggleFavourites(city: City) {
-    this.favouritesService.toggleFavourites(city)
+    this.favouritesService.toggleFavourites(city);
+  }
+
+  goToWeatherDetails(city: City) {
+    this.router.navigateByUrl(this.getRouterLink(city))
   }
 }

@@ -1,0 +1,49 @@
+<div class="settings-page"
+     tuiCardLarge
+     tuiSurface="elevated">
+  <header tuiHeader class="weather-page__header">
+    <h1 tuiTitle>
+      <div class="settings-page__header__title">
+        <h1>Settings</h1>
+      </div>
+      <span tuiSubtitle>
+        <i class="settings-page__header__description">Adjust rest api units</i>
+      </span>
+    </h1>
+  </header>
+
+  <div class="settings-page__content" *ngIf="settingsGroup">
+
+    <form [formGroup]="settingsGroup">
+      <tui-select formControlName="temperature">
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="temperatures"
+        ></tui-data-list-wrapper>
+      </tui-select>
+
+      <tui-select formControlName="speed">
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="speeds"
+        ></tui-data-list-wrapper>
+      </tui-select>
+
+      <tui-select formControlName="precipitation">
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="precipitations"
+        ></tui-data-list-wrapper>
+      </tui-select>
+    </form>
+
+    <footer class="settings-page__footer">
+      <button
+        iconLeft="tuiIconSave"
+        tuiButton
+        (click)="setUnits()"
+      >Save changes</button>
+    </footer>
+
+  </div>
+</div>

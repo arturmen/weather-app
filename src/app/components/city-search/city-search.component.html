@@ -12,9 +12,15 @@
   <button
     iconLeft="tuiIconSearch"
     tuiButton
+    type="submit"
+    [disabled]="!(search$ | async) && !selectedCity"
     (click)="setSelectedCity()"
   >Search</button>
 </div>
+
+<tui-notification *ngIf="noResults | async" class="no-results">
+  There is no results for: {{ search$ | async }}
+</tui-notification>
 
 
 <ng-template #content let-data>

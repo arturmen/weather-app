@@ -1,47 +1,64 @@
 <header tuiNavigationHeader>
 
-  <button
-    appearance="secondary"
-    iconLeft="tuiIconGrid"
-    tuiIconButton>
-  </button>
-
-  <span tuiNavigationLogo>
+  <div>
     <button
-      iconLeft="tuiIconHome"
+      iconLeft="tuiIconMenu"
+      [appearance]="expanded ? 'secondary' : ''"
+      (click)="expanded = !expanded"
+      [class.active]="expanded"
+      tuiAppearance="flat"
+      tuiIconButton>
+    </button>
+
+    <a
+      iconLeft="tuiIconUmbrella"
+      routerLink="/home"
+      routerLinkActive="active"
+      tuiAppearance="flat"
       tuiButton
-      (click)="goToHomePage()"
-    ></button>
-    <span tuiFade>Weather app</span>
+    >
+      <div tuiFade>Weather app</div>
+    </a>
     <tui-badge>v0.1</tui-badge>
-  </span>
+  </div>
 
+  <a
+    iconLeft="tuiIconSettings"
+    routerLink="/settings"
+    routerLinkActive="active"
+    tuiAppearance="flat"
+    tuiButton
+  >
+    Settings
+  </a>
 </header>
-
-<!--<aside [tuiNavigationAside]="expanded">-->
-<!--  Sidebar content-->
-<!--</aside>-->
-
-
 
 <div [style.display]="'flex'">
   <aside
     [tuiNavigationAside]="expanded"
   >
     <header>
-      <button
+      <a
         iconLeft="tuiIconHome"
+        routerLink="/home"
+        routerLinkActive="active"
+        tuiAppearance="flat"
         tuiButton
       >
-        <span tuiFade>Weather app</span>
-      </button>
+        Weather app
+      </a>
     </header>
-    <button
+
+    <a
       iconLeft="tuiIconSearch"
+      routerLink="/browse"
+      routerLinkActive="active"
+      tuiAppearance="flat"
       tuiButton
     >
       Search city
-    </button>
+    </a>
+
     <a
       iconLeft="tuiIconStar"
       routerLink="/favourites"
@@ -51,29 +68,46 @@
     >
       Favourites
     </a>
+
     <tui-expand [expanded]="expanded">
-      <button tuiButton *ngFor="let favourite of favourites">{{ favourite.name }}</button>
+      <a *ngFor="let favourite of favourites"
+         iconLeft="tuiIconUmbrella"
+         [routerLink]="getRouterLink(favourite)"
+         routerLinkActive="active"
+         tuiButton
+      >{{ favourite.name }}, {{ favourite.country }}</a>
     </tui-expand>
-    <button
-      iconLeft="tuiIconHeart"
+
+    <a
+      iconLeft="tuiIconGithub"
+      href="https://github.com/arturmen/weather-app"
+      target="_blank"
+      tuiAppearance="flat"
       tuiButton
     >
-      <span tuiFade>By default ellipsis is used but you can use fade too</span>
-    </button>
-    <hr />
-    <button
-      iconLeft="tuiIconPlus"
+      Github
+    </a>
+
+    <a
+      iconLeft="tuiIconLinkedin"
+      href="https://www.linkedin.com/in/artur-muron/"
+      target="_blank"
+      tuiAppearance="flat"
       tuiButton
     >
-      Add
-    </button>
+      About author
+    </a>
+
     <footer>
-      <button
-        iconLeft="tuiIconStar"
+      <a
+        iconLeft="tuiIconSettings"
+        routerLink="/settings"
+        routerLinkActive="active"
+        tuiAppearance="flat"
         tuiButton
       >
-        Favorites
-      </button>
+        Settings
+      </a>
       <button
         tuiButton
         [iconLeft]="expanded ? 'tuiIconChevronLeft' : 'tuiIconChevronRight'"

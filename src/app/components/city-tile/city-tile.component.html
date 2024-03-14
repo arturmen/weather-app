@@ -5,7 +5,7 @@
   <header tuiHeader class="city-tile__header">
     <h1 tuiTitle>
       <div class="city-tile__header__title">
-        {{ city.name }}
+        <span class="city-tile__header__title__link" (click)="goToWeatherDetails(city)">{{ city.name }}</span>
         <tui-svg [class.favourite]="favourites.has(city.id)" (click)="toggleFavourites(city)" src="tuiIconStar"></tui-svg>
       </div>
       <span tuiSubtitle>
@@ -22,7 +22,7 @@
 
   <footer class="city-tile__footer">
     <a
-      iconLeft="tuiIconExternalLink"
+      iconLeft="tuiIconUmbrella"
       [routerLink]="getRouterLink(city)"
       routerLinkActive="active"
       tuiButton

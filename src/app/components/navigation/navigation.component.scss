@@ -1,6 +1,7 @@
 :host {
   header[tuiNavigationHeader] {
-    //background: aquamarine;
+    display: flex;
+    justify-content: space-between;
   }
 
   aside {

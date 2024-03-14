@@ -1,0 +1,73 @@
+<div class="daily" *ngIf="weather$ | async; let weather">
+  <tui-accordion class="daily__accordion" [rounded]="false">
+    <tui-accordion-item
+      *ngFor="let weatherDay of weather.daily.temperature_2m_max.constructor(weather.daily.temperature_2m_max.length) let weatherDayIndex = index"
+      borders="top-bottom"
+    >
+      <div class="daily__accordion__item">
+        <div> {{ weather.daily.time[weatherDayIndex] | date:'fullDate' }}</div>
+        <div class="middle"> {{ weather.daily.temperature_2m_min[weatherDayIndex] }}{{ weather.daily_units.temperature_2m_min }} — {{ weather.daily.temperature_2m_max[weatherDayIndex] }}{{ weather.daily_units.temperature_2m_max }}</div>
+        <app-weather-model [small]="true" [weatherCode]="weather.daily.weather_code[weatherDayIndex]"></app-weather-model>
+      </div>
+
+      <ng-template tuiAccordionItemContent>
+
+        <div class="daily__accordion__item__template">
+          <div class="daily__accordion__item__template__basic">
+            <div class="daily__accordion__item__template__basic__temperature">
+              <div class="daily__accordion__item__template__basic__temperature__main">
+                {{ weather.daily.temperature_2m_min[weatherDayIndex] }}{{ weather.daily_units.temperature_2m_min }} — {{ weather.daily.temperature_2m_max[weatherDayIndex] }}{{ weather.daily_units.temperature_2m_max }}
+              </div>
+              <div class="daily__accordion__item__template__basic__temperature__side">
+                <div>Apparent:</div>
+                <div>
+                  {{ weather.daily.apparent_temperature_min[weatherDayIndex] }}{{ weather.daily_units.apparent_temperature_min }} — {{ weather.daily.apparent_temperature_max[weatherDayIndex] }}{{ weather.daily_units.apparent_temperature_max }}
+                </div>
+              </div>
+            </div>
+
+            <div class="daily__accordion__item__template__basic__icon">
+              <app-weather-model [weatherCode]="weather.daily.weather_code[weatherDayIndex]"></app-weather-model>
+            </div>
+
+            <div class="daily__accordion__item__template__basic__other">
+              <div class="title">Precipitation Sum</div>
+              <div class="value">{{ weather.daily.precipitation_sum[weatherDayIndex] }} {{ weather.daily_units.precipitation_sum }}</div>
+              <br>
+              <div class="title">Sunshine duration</div>
+              <div class="value">{{ parseFloat((weather.daily.sunshine_duration[weatherDayIndex]/3600).toString()).toFixed(2) }}h</div>
+            </div>
+
+            <div class="daily__accordion__item__template__basic__other">
+              <div class="title">Max wind speed</div>
+              <div class="value">{{ weather.daily.wind_speed_10m_max[weatherDayIndex] }} {{ weather.daily_units.wind_speed_10m_max }}</div>
+              <br>
+              <div class="title">Precipitation probability</div>
+              <div class="value">{{ weather.daily.precipitation_probability_max[weatherDayIndex] }}{{ weather.daily_units.precipitation_probability_max }}</div>
+            </div>
+          </div>
+          <div class="daily__accordion__item__template__advanced">
+            <div class="daily__accordion__item__template__advanced__other">
+              <tui-icon icon="tuiIconSunrise"></tui-icon>
+              <div class="title">Sunrise</div>
+              <div class="value">{{ weather.daily.sunrise[weatherDayIndex] | date:'hh:mm a' }}</div>
+            </div>
+
+            <div class="daily__accordion__item__template__advanced__other">
+              <tui-icon icon="tuiIconSunset"></tui-icon>
+              <div class="title">Sunset</div>
+              <div class="value">{{ weather.daily.sunset[weatherDayIndex] | date:'hh:mm a'}}</div>
+            </div>
+
+            <div class="daily__accordion__item__template__advanced__other">
+              <tui-icon icon="tuiIconSun"></tui-icon>
+              <div class="title">UV Index</div>
+              <div class="value">{{ weather.daily.uv_index_max[weatherDayIndex] }} of 11</div>
+            </div>
+          </div>
+        </div>
+
+      </ng-template>
+    </tui-accordion-item>
+  </tui-accordion>
+</div>

@@ -1,0 +1,63 @@
+<div class="hourly" *ngIf="weather$ | async; let weather">
+  <tui-accordion class="hourly__accordion" [rounded]="false">
+    <tui-accordion-item
+      *ngFor="let weatherHour of weather.hourly.apparent_temperature.constructor(weather.hourly.apparent_temperature.length) let weatherHourIndex = index"
+      borders="top-bottom"
+    >
+      <div class="hourly__accordion__item">
+        <div>
+          {{ weather.hourly.time[weatherHourIndex] | date:'h:mm a' }}
+          <span *ngIf="isTomorrow(weather.hourly.time[weatherHourIndex])" class="tomorrow">Tomorrow</span>
+        </div>
+        <div class="middle"> {{ weather.hourly.temperature_2m[weatherHourIndex] }}{{ weather.hourly_units.temperature_2m }}</div>
+        <app-weather-model [small]="true" [weatherCode]="weather.hourly.weather_code[weatherHourIndex]"></app-weather-model>
+      </div>
+
+      <ng-template tuiAccordionItemContent>
+        <div class="hourly__accordion__item__template">
+          <strong> {{ weather.hourly.time[weatherHourIndex] | date: 'fullDate' }} </strong>| <span *ngIf="weather.hourly.is_day[weatherHourIndex]">Day</span> <span *ngIf="!weather.hourly.is_day[weatherHourIndex]">Night</span>
+
+          <div class="hourly__accordion__item__template__basic">
+            <div class="hourly__accordion__item__template__basic__temperature">
+              <div class="hourly__accordion__item__template__basic__temperature__main">{{ weather.hourly.temperature_2m[weatherHourIndex] }}{{ weather.hourly_units.temperature_2m }}</div>
+              <div class="hourly__accordion__item__template__basic__temperature__side">
+                <div>Apparent:</div>
+                <div>{{ weather.hourly.apparent_temperature[weatherHourIndex] }}{{ weather.hourly_units.apparent_temperature }}</div>
+              </div>
+            </div>
+
+            <div class="hourly__accordion__item__template__basic__icon">
+              <app-weather-model [weatherCode]="weather.hourly.weather_code[weatherHourIndex]"></app-weather-model>
+            </div>
+
+            <div class="hourly__accordion__item__template__basic__other">
+              <div class="title">Precipitation</div>
+              <div class="value">{{ weather.hourly.precipitation[weatherHourIndex] }} {{ weather.hourly_units.precipitation }}</div>
+              <br>
+              <div class="title">Cloud cover</div>
+              <div class="value">{{ weather.hourly.cloud_cover[weatherHourIndex] }}{{ weather.hourly_units.cloud_cover }}</div>
+            </div>
+
+            <div class="hourly__accordion__item__template__basic__other">
+              <div class="title">Wind</div>
+              <div class="value">{{ weather.hourly.wind_speed_10m[weatherHourIndex] }} {{ weather.hourly_units.wind_speed_10m }}</div>
+              <br>
+              <div class="title">Humidity</div>
+              <div class="value">{{ weather.hourly.relative_humidity_2m[weatherHourIndex] }}{{ weather.hourly_units.relative_humidity_2m }}</div>
+            </div>
+
+            <div class="hourly__accordion__item__template__basic__other">
+              <div class="title">Precipitation probability</div>
+              <div class="value">{{ weather.hourly.precipitation_probability[weatherHourIndex] }}{{ weather.hourly_units.precipitation_probability }}</div>
+              <br>
+              <div class="title">Atmospheric pressure</div>
+              <div class="value">{{ weather.hourly.pressure_msl[weatherHourIndex] }} {{ weather.hourly_units.pressure_msl }}</div>
+            </div>
+          </div>
+        </div>
+
+
+      </ng-template>
+    </tui-accordion-item>
+  </tui-accordion>
+</div>

@@ -1,0 +1,5 @@
+<h1 class="home-page__title">Welcome to Weather App</h1>
+<app-weather-card *ngIf="(city$ | async) && (weather$ | async); else browse"></app-weather-card>
+<ng-template #browse>
+  <app-browse-page></app-browse-page>
+</ng-template>

@@ -1,5 +1,15 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, Output } from '@angular/core';
-import { debounceTime, filter, Observable, startWith, Subject, Subscription, switchMap, tap } from "rxjs";
+import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  BehaviorSubject,
+  debounceTime,
+  filter,
+  Observable,
+  startWith,
+  Subject,
+  Subscription,
+  switchMap,
+  tap
+} from "rxjs";
 import { FormControl } from "@angular/forms";
 import { HttpService } from "../../services/http.service";
 import { CityService } from "../../services/city.service";
@@ -12,7 +22,7 @@ import { City } from "../../models/app.model";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CitySearchComponent {
-  readonly search$ = new Subject<string | null>();
+  readonly search$ = new BehaviorSubject<string | null>(null);
   readonly stringify = (item: City): string => `${item.name}`;
 
   items$: Observable<City[]> = this.search$.pipe(
@@ -24,6 +34,8 @@ export class CitySearchComponent {
     startWith([]),
   );
 
+  noResults = new BehaviorSubject(false);
+
   selectedCity: FormControl<City> = new FormControl();
 
   constructor(
@@ -33,11 +45,21 @@ export class CitySearchComponent {
   }
 
   setSelectedCity() {
-    this.cityService.setSelectedCity(this.selectedCity.value)
+    if (this.selectedCity.value) {
+      this.cityService.setSelectedCity(this.selectedCity.value)
+    } else {
+      this.cityService.getCities(this.search$.value ?? '').subscribe(cities => {
+        if (cities.length === 0) {
+          this.noResults.next(true);
+        }
+      })
+    }
   }
 
   onSearchChange(searchQuery: string | null): void {
+    this.noResults.next(false);
     this.search$.next(searchQuery);
+    this.cityService.selectedCity.next(null);
   }
 
   extractValueFromEvent(event: Event | null): string | null {

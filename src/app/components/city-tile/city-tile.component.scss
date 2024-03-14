@@ -8,6 +8,10 @@
       &__title {
         display: flex;
 
+        &__link {
+          cursor: pointer;
+        }
+
         tui-svg {
           color: lightgray;
 

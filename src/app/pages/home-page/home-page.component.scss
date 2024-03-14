@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  gap: 50px;
+
+  .home-page__title {
+    display: flex;
+    justify-content: center;
+  }
+}

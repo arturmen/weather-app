@@ -16,10 +16,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowsePageComponent } from './pages/browse-page/browse-page.component';
 import {
+  TuiAccordionModule,
   TuiAvatarComponent, TuiBreadcrumbsModule,
   TuiComboBoxModule,
   TuiDataListWrapperModule,
-  TuiFilterByInputPipeModule, TuiTabsModule, TuiToggleModule
+  TuiFilterByInputPipeModule, TuiSelectModule, TuiTabsModule, TuiToggleModule
 } from "@taiga-ui/kit";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 // @ts-ignore
@@ -40,6 +41,14 @@ import { CommonModule } from "@angular/common";
 import { TuiRippleModule } from "@taiga-ui/addon-mobile";
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { WeatherPageComponent } from './pages/weather-page/weather-page.component';
+import { FavouritesPageComponent } from './pages/favourites-page/favourites-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { CurrentComponent } from './components/weather/current/current.component';
+import { DailyComponent } from './components/weather/daily/daily.component';
+import { HourlyComponent } from './components/weather/hourly/hourly.component';
+import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+import { WeatherModelComponent } from './components/weather/weather-model/weather-model.component';
+import { WeatherCardComponent } from './components/weather/weather-card/weather-card.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +57,15 @@ import { WeatherPageComponent } from './pages/weather-page/weather-page.componen
     CitySearchComponent,
     CityTileComponent,
     NavigationComponent,
-    WeatherPageComponent
+    WeatherPageComponent,
+    FavouritesPageComponent,
+    HomePageComponent,
+    CurrentComponent,
+    DailyComponent,
+    HourlyComponent,
+    SettingsPageComponent,
+    WeatherModelComponent,
+    WeatherCardComponent
   ],
   imports: [
     BrowserModule,
@@ -94,6 +111,8 @@ import { WeatherPageComponent } from './pages/weather-page/weather-page.componen
     TuiFadeModule,
     TuiBadgeModule,
     TuiAppearanceModule,
+    TuiAccordionModule,
+    TuiSelectModule,
   ],
   providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
   bootstrap: [AppComponent]

@@ -42,4 +42,10 @@ export class CityService {
       tap(cities => this.cities.next(cities))
     );
   }
+
+  clearData() {
+    this.weather.next(null);
+    this.selectedCity.next(null);
+    this.cities.next([]);
+  }
 }
