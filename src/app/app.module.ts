@@ -1,13 +1,13 @@
 import {
-  TuiRootModule,
-  TuiDialogModule,
-  TuiAlertModule,
-  TUI_SANITIZER,
-  TuiTextfieldControllerModule,
-  TuiNotificationModule,
-  TuiSvgModule,
-  TuiHintModule,
-  TuiHostedDropdownModule, TuiDataListModule, TuiLinkModule, TuiDropdownModule, TuiExpandModule
+    TuiRootModule,
+    TuiDialogModule,
+    TuiAlertModule,
+    TUI_SANITIZER,
+    TuiTextfieldControllerModule,
+    TuiNotificationModule,
+    TuiSvgModule,
+    TuiHintModule,
+    TuiHostedDropdownModule, TuiDataListModule, TuiLinkModule, TuiDropdownModule, TuiExpandModule, TuiTooltipModule
 } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
@@ -30,6 +30,7 @@ import { TuiLetModule, TuiPlatformModule, TuiRepeatTimesModule } from "@taiga-ui
 import { CitySearchComponent } from './components/city-search/city-search.component';
 import { CityTileComponent } from './components/city-tile/city-tile.component';
 import {
+  TuiAppBarModule,
   TuiAppearanceDirective, TuiAppearanceModule,
   TuiBadgeDirective, TuiBadgeModule, TuiBadgeNotificationComponent,
   TuiButtonCloseModule, TuiButtonModule,
@@ -38,7 +39,7 @@ import {
   TuiSurfaceModule, TuiThumbnailCardModule, TuiTitleModule
 } from "@taiga-ui/experimental";
 import { CommonModule } from "@angular/common";
-import { TuiRippleModule } from "@taiga-ui/addon-mobile";
+import { TuiRippleModule, TuiTabBarModule } from "@taiga-ui/addon-mobile";
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { WeatherPageComponent } from './pages/weather-page/weather-page.component';
 import { FavouritesPageComponent } from './pages/favourites-page/favourites-page.component';
@@ -49,6 +50,7 @@ import { HourlyComponent } from './components/weather/hourly/hourly.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 import { WeatherModelComponent } from './components/weather/weather-model/weather-model.component';
 import { WeatherCardComponent } from './components/weather/weather-card/weather-card.component';
+import { SettingsPipe } from './pages/settings-page/settings.pipe';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { WeatherCardComponent } from './components/weather/weather-card/weather-
     HourlyComponent,
     SettingsPageComponent,
     WeatherModelComponent,
-    WeatherCardComponent
+    WeatherCardComponent,
+    SettingsPipe
   ],
   imports: [
     BrowserModule,
@@ -113,6 +116,9 @@ import { WeatherCardComponent } from './components/weather/weather-card/weather-
     TuiAppearanceModule,
     TuiAccordionModule,
     TuiSelectModule,
+    TuiTooltipModule,
+    TuiTabBarModule,
+    TuiAppBarModule,
   ],
   providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
   bootstrap: [AppComponent]

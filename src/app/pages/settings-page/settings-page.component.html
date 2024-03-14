@@ -7,7 +7,7 @@
         <h1>Settings</h1>
       </div>
       <span tuiSubtitle>
-        <i class="settings-page__header__description">Adjust rest api units</i>
+        <i class="settings-page__header__description">Switch between preferred units for temperature, wind speed, and precipitation</i>
       </span>
     </h1>
   </header>
@@ -15,24 +15,28 @@
   <div class="settings-page__content" *ngIf="settingsGroup">
 
     <form [formGroup]="settingsGroup">
-      <tui-select formControlName="temperature">
+      <tui-select formControlName="temperature" [valueContent]="settingContent">
+        Temperature unit
         <tui-data-list-wrapper
           *tuiDataList
           [items]="temperatures"
+          [itemContent]="settingContent"
         ></tui-data-list-wrapper>
       </tui-select>
-
-      <tui-select formControlName="speed">
+      <tui-select formControlName="speed" [valueContent]="settingContent">
+        Wind speed unit
         <tui-data-list-wrapper
           *tuiDataList
           [items]="speeds"
+          [itemContent]="settingContent"
         ></tui-data-list-wrapper>
       </tui-select>
-
-      <tui-select formControlName="precipitation">
+      <tui-select formControlName="precipitation" [valueContent]="settingContent">
+        Precipitation unit
         <tui-data-list-wrapper
           *tuiDataList
           [items]="precipitations"
+          [itemContent]="settingContent"
         ></tui-data-list-wrapper>
       </tui-select>
     </form>
@@ -47,3 +51,7 @@
 
   </div>
 </div>
+
+<ng-template #settingContent let-item>
+  {{ item | settings }}
+</ng-template>

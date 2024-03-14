@@ -1,125 +1,191 @@
-<header tuiNavigationHeader>
+<div class="navigation-desktop">
+  <header tuiNavigationHeader>
 
-  <div>
-    <button
-      iconLeft="tuiIconMenu"
-      [appearance]="expanded ? 'secondary' : ''"
-      (click)="expanded = !expanded"
-      [class.active]="expanded"
-      tuiAppearance="flat"
-      tuiIconButton>
-    </button>
+    <div>
+      <button
+        iconLeft="tuiIconMenu"
+        [appearance]="expanded ? 'secondary' : ''"
+        (click)="expanded = !expanded"
+        [class.active]="expanded"
+        tuiAppearance="flat"
+        tuiIconButton>
+      </button>
 
-    <a
-      iconLeft="tuiIconUmbrella"
-      routerLink="/home"
-      routerLinkActive="active"
-      tuiAppearance="flat"
-      tuiButton
-    >
-      <div tuiFade>Weather app</div>
-    </a>
-    <tui-badge>v0.1</tui-badge>
-  </div>
-
-  <a
-    iconLeft="tuiIconSettings"
-    routerLink="/settings"
-    routerLinkActive="active"
-    tuiAppearance="flat"
-    tuiButton
-  >
-    Settings
-  </a>
-</header>
-
-<div [style.display]="'flex'">
-  <aside
-    [tuiNavigationAside]="expanded"
-  >
-    <header>
       <a
-        iconLeft="tuiIconHome"
+        iconLeft="tuiIconUmbrella"
         routerLink="/home"
         routerLinkActive="active"
         tuiAppearance="flat"
         tuiButton
       >
-        Weather app
+        <strong tuiFade>WeatherApp</strong>
       </a>
-    </header>
+      <tui-badge>v0.1</tui-badge>
+    </div>
 
     <a
-      iconLeft="tuiIconSearch"
-      routerLink="/browse"
+      iconLeft="tuiIconSettings"
+      routerLink="/settings"
       routerLinkActive="active"
       tuiAppearance="flat"
       tuiButton
     >
-      Search city
+      Settings
+    </a>
+  </header>
+
+  <div [style.display]="'flex'">
+    <aside
+      [tuiNavigationAside]="expanded"
+    >
+      <header>
+        <a
+          iconLeft="tuiIconHome"
+          routerLink="/home"
+          routerLinkActive="active"
+          tuiAppearance="flat"
+          tuiButton
+        >
+          Weather app
+        </a>
+      </header>
+
+      <a
+        iconLeft="tuiIconSearch"
+        routerLink="/browse"
+        routerLinkActive="active"
+        tuiAppearance="flat"
+        tuiButton
+      >
+        Search city
+      </a>
+
+      <a
+        iconLeft="tuiIconStar"
+        routerLink="/favourites"
+        routerLinkActive="active"
+        tuiAppearance="flat"
+        tuiButton
+      >
+        Favourites
+      </a>
+
+      <tui-expand [expanded]="expanded">
+        <a *ngFor="let favourite of favourites"
+           iconLeft="tuiIconUmbrella"
+           [routerLink]="getRouterLink(favourite)"
+           routerLinkActive="active"
+           tuiButton
+        >{{ favourite.name }}, {{ favourite.country }}</a>
+      </tui-expand>
+
+      <a
+        iconLeft="tuiIconGithub"
+        href="https://github.com/arturmen/weather-app"
+        target="_blank"
+        tuiAppearance="flat"
+        tuiButton
+      >
+        Github
+      </a>
+
+      <a
+        iconLeft="tuiIconLinkedin"
+        href="https://www.linkedin.com/in/artur-muron/"
+        target="_blank"
+        tuiAppearance="flat"
+        tuiButton
+      >
+        About author
+      </a>
+
+      <footer>
+        <a
+          iconLeft="tuiIconSettings"
+          routerLink="/settings"
+          routerLinkActive="active"
+          tuiAppearance="flat"
+          tuiButton
+        >
+          Settings
+        </a>
+        <button
+          tuiButton
+          [iconLeft]="expanded ? 'tuiIconChevronLeft' : 'tuiIconChevronRight'"
+          (click)="expanded = !expanded"
+        >
+          Collapse
+        </button>
+      </footer>
+    </aside>
+
+    <main tuiNavigationMain>
+      <ng-content></ng-content>
+    </main>
+
+  </div>
+</div>
+
+
+
+<div class="navigation-mobile">
+  <tui-app-bar class="navigation-mobile__top black">
+    <a
+      iconLeft="tuiIconHomeLarge"
+      tuiIconButton
+      routerLink="/home"
+      routerLinkActive
+      tuiSlot="left"
+    ></a>
+    WeatherApp
+    <a
+      iconLeft="tuiIconSearchLarge"
+      tuiIconButton
+      routerLink="/browse"
+      routerLinkActive
+      tuiSlot="right"
+    ></a>
+  </tui-app-bar>
+
+  <div class="navigation-mobile__content">
+    <ng-content></ng-content>
+  </div>
+
+  <nav tuiTabBar class="navigation-mobile__footer">
+    <a
+      icon="tuiIconSettingsLarge"
+      routerLink="/settings"
+      routerLinkActive="active"
+      tuiTabBarItem
+    >
+      Settings
     </a>
 
     <a
-      iconLeft="tuiIconStar"
+      icon="tuiIconStarLarge"
       routerLink="/favourites"
-      routerLinkActive="active"
-      tuiAppearance="flat"
-      tuiButton
+      routerLinkActive
+      tuiTabBarItem
     >
       Favourites
     </a>
 
-    <tui-expand [expanded]="expanded">
-      <a *ngFor="let favourite of favourites"
-         iconLeft="tuiIconUmbrella"
-         [routerLink]="getRouterLink(favourite)"
-         routerLinkActive="active"
-         tuiButton
-      >{{ favourite.name }}, {{ favourite.country }}</a>
-    </tui-expand>
-
     <a
-      iconLeft="tuiIconGithub"
+      icon="tuiIconGithubLarge"
       href="https://github.com/arturmen/weather-app"
       target="_blank"
-      tuiAppearance="flat"
-      tuiButton
+      tuiTabBarItem
     >
       Github
     </a>
 
     <a
-      iconLeft="tuiIconLinkedin"
+      icon="tuiIconLinkedinLarge"
       href="https://www.linkedin.com/in/artur-muron/"
       target="_blank"
-      tuiAppearance="flat"
-      tuiButton
+      tuiTabBarItem
     >
       About author
     </a>
-
-    <footer>
-      <a
-        iconLeft="tuiIconSettings"
-        routerLink="/settings"
-        routerLinkActive="active"
-        tuiAppearance="flat"
-        tuiButton
-      >
-        Settings
-      </a>
-      <button
-        tuiButton
-        [iconLeft]="expanded ? 'tuiIconChevronLeft' : 'tuiIconChevronRight'"
-        (click)="expanded = !expanded"
-      >
-        Collapse
-      </button>
-    </footer>
-  </aside>
-
-  <main tuiNavigationMain>
-    <ng-content></ng-content>
-  </main>
-
+  </nav>
 </div>

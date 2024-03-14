@@ -1,10 +1,72 @@
+@import '../../styles/breakpoints';
+
+$navigation-bar-color: #0F172E;
+
 :host {
-  header[tuiNavigationHeader] {
-    display: flex;
-    justify-content: space-between;
+  .navigation-desktop {
+    @include mobile {
+      display: none;
+    }
+
+    @include desktop {
+      display: block;
+    }
+
+    header[tuiNavigationHeader] {
+      display: flex;
+      justify-content: space-between;
+      background-color: $navigation-bar-color;
+    }
+
+    aside {
+      height: calc(100vh - 48px);
+      background-color: $navigation-bar-color;
+    }
+
+    main {
+      background: #FAF7DB;
+
+      &:before {
+        box-shadow:  0 -1.25rem $navigation-bar-color;
+      }
+    }
   }
 
-  aside {
-    height: calc(100vh - 48px);
+  .navigation-mobile {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    @include mobile {
+      display: flex;
+    }
+
+    @include desktop {
+      display: none;
+    }
+
+    &__top {
+      &.black {
+        color: var(--tui-base-01);
+        background: $navigation-bar-color;
+
+        a {
+          color: whitesmoke;
+        }
+      }
+    }
+
+    &__content {
+      flex-grow: 1;
+      max-height: 100%;
+      overflow: auto;
+      background: #FAF7DB;
+    }
+
+    &__footer {
+
+    }
+
+
   }
 }

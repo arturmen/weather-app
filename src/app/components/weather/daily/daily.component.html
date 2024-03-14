@@ -61,7 +61,12 @@
 
             <div class="daily__accordion__item__template__advanced__other">
               <tui-icon icon="tuiIconSun"></tui-icon>
-              <div class="title">UV Index</div>
+              <div class="title">
+                UV Index
+                <tui-tooltip
+                  content="UV index is an international standard measurement of the strength of the sunburn-producing ultraviolet (UV) radiation. It is recommended to protect skin when the UV index is 3 or higher."
+                ></tui-tooltip>
+              </div>
               <div class="value">{{ weather.daily.uv_index_max[weatherDayIndex] }} of 11</div>
             </div>
           </div>

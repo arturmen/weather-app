@@ -37,6 +37,12 @@
           }
         }
       }
+
+      ::ng-deep.t-wrapper:hover {
+        .t-header_hoverable {
+          background: #f1ebcf !important;
+        }
+      }
     }
   }
 }

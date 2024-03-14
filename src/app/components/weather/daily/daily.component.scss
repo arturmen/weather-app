@@ -57,5 +57,11 @@
         }
       }
     }
+
+    ::ng-deep.t-wrapper:hover {
+      .t-header_hoverable {
+        background: #e9e9f1!important;
+      }
+    }
   }
 }
