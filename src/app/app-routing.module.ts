@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { provideRouter, RouterModule, Routes, withHashLocation } from '@angular/router';
 import { BrowsePageComponent } from "./pages/browse-page/browse-page.component";
 import { WeatherPageComponent } from "./pages/weather-page/weather-page.component";
 import { FavouritesPageComponent } from "./pages/favourites-page/favourites-page.component";
@@ -68,6 +68,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [provideRouter(routes, withHashLocation())]
 })
 export class AppRoutingModule {}
