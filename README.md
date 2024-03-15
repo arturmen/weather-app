@@ -17,7 +17,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 ## Deployment
 Projet available without local building on github pages:  
 https://arturmen.github.io/weather-app  
-Note: Due to github pages refreshing bug, refreshing view and entering page by specific route may cause 404. If it happens, just enter https://arturmen.github.io/weather-app again. Locally everything works fine.
 
 ## Project description
 
