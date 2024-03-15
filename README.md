@@ -17,7 +17,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 ## Deployment
 Projet available without local building on github pages:  
 https://arturmen.github.io/weather-app  
-Note: Due to github pages refreshing bug, refreshing view may cause 404. If it happens, just enter https://arturmen.github.io/weather-app again. Locally everything works fine.
+Note: Due to github pages refreshing bug, refreshing view and entering page by specific route may cause 404. If it happens, just enter https://arturmen.github.io/weather-app again. Locally everything works fine.
 
 ## Project description
 
@@ -26,7 +26,7 @@ Note: Due to github pages refreshing bug, refreshing view may cause 404. If it h
 * /weather/:id  (umbrella icon)   - Main weather forecast page, that displays weather based on city id. It shows current weather and forecast divided by hours and days.  
 * /browse       (search icon)     - Search page that finds possible cities by name, gives opportunity to add city to favourites and show weather forecast(weather details)  
 * /settings     (cog icon)        - Settings page that gives opportunity to change forecast units: Temperature, Wind speed and Precipitation  
-* /favourites   (star icon)       - Page with favourites cities picked by marking the star icon next to City name  
+* /favourites   (star icon)       - Page with favourites cities picked by marking the star icon next to City name
 
 ### Features
 * Current weather
