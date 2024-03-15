@@ -1,9 +1,0 @@
-<div class="favourites" *ngIf="favourites$ | async; let favourites">
-  <h2>Favourite cities</h2>
-  <div class="favourites__cities">
-    <app-city-tile *ngFor="let city of favourites"
-                   class="favourites__cities__tile"
-                   [city]="city">
-    </app-city-tile>
-  </div>
-</div>
